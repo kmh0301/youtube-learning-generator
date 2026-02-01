@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Youtube, BookOpen, Headphones, Mic, CheckSquare, BarChart2, FileText, Download } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { Button } from './components/ui/button'
+import { Input } from './components/ui/input'
 // Simplified select and tabs for this demo version to keep file count low, 
 // in full version we would import them from components/ui
-import { cn } from '@/lib/utils'
+import { cn } from './lib/utils'
 
 // Mock Data Types
 type VocabItem = { word: string; definition: string; example: string; timestamp: number; importance: string }
