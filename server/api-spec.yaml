@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: YouTube Professional Learning Pack Generator API
+  version: 1.0.0
+  description: API for generating professional language learning content from YouTube videos
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /generate:
+    post:
+      summary: Generate learning pack from YouTube URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - identity
+                - field
+              properties:
+                url:
+                  type: string
+                  description: YouTube Video URL
+                identity:
+                  type: string
+                  enum: [lawyer, engineer, pm, student]
+                field:
+                  type: string
+                  enum: [law_english, business_negotiation, software_engineering, exam_english]
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearningPack'
+
+components:
+  schemas:
+    LearningPack:
+      type: object
+      properties:
+        meta:
+          type: object
+          properties:
+            title:
+              type: string
+            duration:
+              type: string
+            vocabCount:
+              type: integer
+            topicCoverage:
+              type: string
+        guide:
+          type: string
+          description: Video Introduction/Guide
+        vocabulary:
+          type: array
+          items:
+            type: object
+            properties:
+              word:
+                type: string
+              definition:
+                type: string
+              example:
+                type: string
+              timestamp:
+                type: number
+              importance:
+                type: string
+        clozeTest:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              answer:
+                type: string
+              options:
+                type: array
+                items:
+                  type: string
+              timestamp:
+                type: number
+        shadowing:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              start:
+                type: number
+              end:
+                type: number
+              tips:
+                type: string
+        quiz:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+              type:
+                type: string
+                enum: [single_choice, short_answer]
+              options:
+                type: array
+                items: 
+                  type: string
+              answer:
+                type: string
+              explanation:
+                type: string
